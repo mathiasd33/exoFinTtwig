@@ -8,7 +8,7 @@
 
 
 {% block main %}
-        <h1>Il y a {{ categories | length }} articles dans la base de données</h1>
+        <h1 class="titreCategories" >Il y a {{ categories | length }} articles dans la base de données</h1>
         <div class="categories">
             {% for categorie in categories %}
                 {% if categorie.published %}
