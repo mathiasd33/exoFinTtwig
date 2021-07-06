@@ -1,0 +1,74 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.resp{
+    width: 100%;
+    height: auto;
+}
+
+.headerS{
+    background: silver;
+
+
+}
+
+li{
+    list-style-type: none;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+
+}
+
+h1{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.logoMenu{
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo{
+    width: 90px;
+}
+
+.menuB{
+    width: 100px;
+}
+
+
+.categories{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background: coral;
+
+}
+
+.categorie{
+    box-shadow: 10px 10px 10px black;
+    border: solid black 1px;
+    background: indianred;
+    border-radius: 10px;
+    width: 40%;
+    padding: 5% 2%;
+    margin: 2%;
+}
+
+.nav_foot ul{
+    display: flex;
+    justify-content: space-around;
+    padding-top: 2%;
+}
+
+.footerE{
+     background: paleturquoise;
+     height: 80px
+ }

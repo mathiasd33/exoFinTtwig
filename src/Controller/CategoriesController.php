@@ -3,8 +3,9 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
 
-class CategoriesControler extends AbstractController
+class CategoriesController extends AbstractController
 {
 
     private $categories = [
@@ -38,5 +39,26 @@ class CategoriesControler extends AbstractController
      * @Route ("/categories", name="categories")
      */
 
+    public function categoriesList()
+    {
+       return $this->render('categories_list.html.twig',[
+         'categories' =>$this->categories
+       ]);
+    }
 
+
+
+    /**
+     * @Route ("/categorie/{id}", name="categorieShow")
+     */
+
+    public function categorieShow($id)
+    {
+        return $this->render("categorieShow.html.twig", [
+           'categorie' => $this->categories[$id]
+        ]);
+    }
 }
+
+
+

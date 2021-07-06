@@ -1,19 +1,47 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block metaTitle %}{% endblock metaTitle %}</title>
+    <link rel="stylesheet" href="{{ asset('style.css') }}">
+</head>
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+<body>
+
+<header class="headerS">
+        <div class= "logoMenu">
+            <div class="logo">
+               <a href={{ path ('home') }}><img src={{ asset ('medias/symfony.png') }}  class="resp"></a>
+            </div>
+
+            <div class="menuB" >
+                <a href={{ path ('categories') }}><img src={{ asset ('medias/menuB.png') }} alt="menu" class="resp"></a>
+            </div>
+
+        </div>
+</header>
+
+<main>
+
+    {%block main%}
+    {%endblock main%}
+
+</main>
+
+<footer class="footerE">
+    <div class="nav_foot">
+        <nav>
+            <ul>
+                <li>lien 1</li>
+                <li>lien 2</li>
+                <li>lien 3</li>
+                <li>lien 4</li>
+                <li>lien 5</li>
+                <li>lien 6</li>
+            </ul>
+        </nav>
+    </div>
+</footer>
+
+
+</body>
 </html>
