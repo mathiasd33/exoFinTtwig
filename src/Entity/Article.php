@@ -4,14 +4,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ArticleRepository;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass=ArticleRepository::class)
  */
-
 class Article
 {
-
     /**
      * @ORM\Id()
      * @ORM\Column(type="integer")
@@ -24,12 +23,40 @@ class Article
      */
     private $title;
 
-
     /**
      * @ORM\Column(type="text")
      */
     private $content;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isPublished;
+
+    public function getIsPublished(): ?bool
+    {
+        return $this->isPublished;
+    }
+
+    public function setIsPublished(?bool $isPublished): self
+    {
+        $this->isPublished = $isPublished;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * @return mixed
@@ -79,29 +106,6 @@ class Article
         $this->createdAt = $createdAt;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getIsPublished()
-    {
-        return $this->isPublished;
-    }
 
-    /**
-     * @param mixed $isPublished
-     */
-    public function setIsPublished($isPublished): void
-    {
-        $this->isPublished = $isPublished;
-    }
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isPublished;
 }

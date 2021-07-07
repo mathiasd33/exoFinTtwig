@@ -6,9 +6,9 @@ use App\Repository\CatagoryRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CatagoryRepository::class)
+ * @ORM\Entity(repositoryClass=CategoryRepository::class)
  */
-class Catagory
+class Category
 {
     /**
      * @ORM\Id
@@ -26,6 +26,11 @@ class Catagory
      * @ORM\Column(type="text")
      */
     private $description;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $category;
 
     public function getId(): ?int
     {
@@ -52,6 +57,18 @@ class Catagory
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getCategory(): ?string
+    {
+        return $this->category;
+    }
+
+    public function setCategory(string $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
