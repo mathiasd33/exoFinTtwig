@@ -11,16 +11,16 @@
         <h1 class="titreCategories" >Il y a {{ categories | length }} articles dans la base de données</h1>
         <div class="categories">
             {% for categorie in categories %}
-                {% if categorie.published %}
+               {#{% if categorie.isPublished %}#}
                     <div class="categorie">
                         {# je génère un lien vers la route articleshow cette route
                     demande une wildcard 'id', donc je l'a renseigne avec l id de l'article bouclé#}
                         <a href={{ path ('categorieShow',{'id' : categorie.id}) }} >
                             <h1>{{categorie.title}}</h1>
                         </a>
-                        <h2>{{categorie.content}}</h2>
+                        <h2>{{categorie.description}}</h2>
                     </div>
-                {% endif %}
+               {#{% endif %}#}
             {% endfor %}
         </div>
 {% endblock main %}

@@ -2,47 +2,23 @@
 
 namespace App\Controller;
 
+use App\Repository\CatagoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CategoriesController extends AbstractController
 {
 
-    private $categories = [
-        1 => [
-            "title" => "Politique",
-            "content" => "Tous les articles liés à Jean Lassalle",
-            "id" => 1,
-            "published" => true,
-        ],
-        2 => [
-            "title" => "Economie",
-            "content" => "Les meilleurs tuyaux pour avoir DU FRIC",
-            "id" => 2,
-            "published" => true
-        ],
-        3 => [
-            "title" => "Securité",
-            "content" => "Attention les étrangers sont très méchants",
-            "id" => 3,
-            "published" => false
-        ],
-        4 => [
-            "title" => "Ecologie",
-            "content" => "Hummer <3",
-            "id" => 4,
-            "published" => true
-        ]
-    ];
 
     /**
      * @Route ("/categories", name="categories")
      */
 
-    public function categoriesList()
+    public function categoriesList(CatagoryRepository $catagoryRepository)
     {
+        $categories = $catagoryRepository->findAll();
        return $this->render('categories_list.html.twig',[
-         'categories' =>$this->categories
+         'categories' =>$categories
        ]);
     }
 
@@ -52,10 +28,11 @@ class CategoriesController extends AbstractController
      * @Route ("/categorie/{id}", name="categorieShow")
      */
 
-    public function categorieShow($id)
+    public function categorieShow($id, CatagoryRepository $catagoryRepository)
     {
+        $categories = $catagoryRepository->find($id);
         return $this->render("categorieShow.html.twig", [
-           'categorie' => $this->categories[$id]
+           'categorie' => $categories
         ]);
     }
 }
