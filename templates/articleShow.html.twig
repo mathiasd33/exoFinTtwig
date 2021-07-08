@@ -1,12 +1,11 @@
 {% extends 'base.html.twig' %}
+
+
 {% block main %}
-    <body>
     <div class="show">
         <h1>{{ article.title }}</h1>
         <div>{{ article.content }}</div>
         <p>{{ article.createdAt | date ('y-m-d') }}</p>
-
+        <p>Categorie : {{ article.category.title }}</p>
     </div>
-
-    </body>
 {% endblock main %}

@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 use App\Repository\ArticleRepository;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -31,6 +32,10 @@ class articleController extends AbstractController
     public function articleShow($id, ArticleRepository $articleRepository)
     {
         $article = $articleRepository->find($id);
+
+        if (is_null($article)){
+            throw new NotFoundHttpException();
+        }
 
         return $this->render("articleShow.html.twig", [
             'article' => $article

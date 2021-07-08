@@ -43,6 +43,11 @@ class Article
         return $this->isPublished;
     }
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+     */
+    private $category;
+
     public function setIsPublished(?bool $isPublished): self
     {
         $this->isPublished = $isPublished;
@@ -104,6 +109,22 @@ class Article
     public function setCreatedAt($createdAt): void
     {
         $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param mixed $category
+     */
+    public function setCategory($category): void
+    {
+        $this->category = $category;
     }
 
 
