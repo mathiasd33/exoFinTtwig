@@ -30,9 +30,9 @@ class CategoriesController extends AbstractController
 
     public function categorieShow($id, CatagoryRepository $catagoryRepository)
     {
-        $categories = $catagoryRepository->find($id);
+        $categorie = $catagoryRepository->find($id);
         return $this->render("categorieShow.html.twig", [
-           'categorie' => $categories
+           'categorie' => $categorie
         ]);
     }
 }

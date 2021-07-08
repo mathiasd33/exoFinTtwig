@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block metaTitle %}
+    La liste des tags
+{% endblock metaTitle %}
+
+{% block main %}
+
+    <div class="tag-container">
+        {% for tag in tags %}
+            <article class="tag">
+                <p style="background:{{ tag.color }} ">{{ tag.title }}</p>
+                <a href={{ path ('tagShow',{'id' : tag.id}) }}>Voir plus</a>
+            </article>
+        {% endfor %}
+    </div>
+
+{% endblock main %}

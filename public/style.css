@@ -24,11 +24,11 @@ a{
 
 .show{
 
-    height: 75%;
-    padding-top: 15%;
+    margin: 20% auto 10% ;
     border: solid black 2px;
-    width: 10% ;
-    margin: auto;
+    width: 20% ;
+
+
 }
 
 .titreCategories{
@@ -82,3 +82,16 @@ a{
      background: paleturquoise;
      height: 80px
  }
+
+.tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20%;
+    margin-bottom: 15%;
+}
+
+.tag {
+    width: 33.33%;
+    text-align: center;
+    border: 1px solid black;
+}

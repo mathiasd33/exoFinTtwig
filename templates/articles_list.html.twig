@@ -15,10 +15,11 @@
                 <div class="categorie">
                     {# je génère un lien vers la route articleshow cette route
                     demande une wildcard 'id', donc je l'a renseigne avec l id de l'article bouclé#}
-                    <a href={{ path ('articleShow',{'id' : article.id}) }} >
+
                         <h1>{{article.title}}</h1>
-                    </a>
+
                     <h2>{{article.content}}</h2>
+                    <a href={{ path ('articleShow',{'id' : article.id}) }} >Voir plus</a>
                 </div>
           {% endif %}
         {% endfor %}
