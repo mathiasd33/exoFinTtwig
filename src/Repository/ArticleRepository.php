@@ -19,32 +19,35 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
-    // /**
-    //  * @return articleController[] Returns an array of articleController objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    //fontction qui permet de faire des recherches a partir de caractères contenue dans la recherche
+    //la variable $term est le résultat
+    public function searchByTerm($term)
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        //j' utilise la methode queryBuilder pour créer une requete sql en php
+        //on met un alias qui correspond a l endroit de la recherche
+        $queryBuilder = $this->createQueryBuilder('article');
 
-    /*
-    public function findOneBySomeField($value): ?articleController
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        //création de la requete vers la bdd
+        $query = $queryBuilder
+
+            //requete pour recuperer les attributs
+            ->select('article')
+
+            //parametre de requete
+            ->where('article.content Like :term')
+
+            //parametre de sécurité afin que l utilisateur ne tape pas de requete sql dans l input
+            ->setParameter('term','%'.$term.'%')
+
+            //transformation en requete sql
+            ->getQuery();
+
+        //retourne le resultat de la requete
+        return $query->getResult();
+
+
+
+
+
     }
-    */
 }

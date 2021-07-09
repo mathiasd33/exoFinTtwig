@@ -41,4 +41,23 @@ class articleController extends AbstractController
             'article' => $article
         ]);
     }
+
+
+    /**
+     * @Route("/search", name="search")
+     */
+
+    public function search(ArticleRepository $articleRepository)
+    {
+        //  recherche de l'utilisateur (
+        $term = 'skate';
+
+        //  récupère le contenu de la recherche
+        $articles = $articleRepository->searchByTerm($term);
+
+        //  affiche les résultats
+        return $this->render('articleSearch.html.twig', [
+            'articles' => $articles
+        ]);
+    }
 }

@@ -28,7 +28,7 @@ class Tag
     private $color;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="tag")
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="t ag")
      */
     private $articles;
 
