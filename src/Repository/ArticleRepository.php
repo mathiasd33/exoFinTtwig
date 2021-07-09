@@ -33,8 +33,14 @@ class ArticleRepository extends ServiceEntityRepository
             //requete pour recuperer les attributs
             ->select('article')
 
+            ->leftJoin('article.category','category')
+            ->leftJoin('article.tag', 'tag')
+
             //parametre de requete
             ->where('article.content Like :term')
+            ->orWhere('article.title LIKE :term')
+            ->orWhere('category.title LIKE :term')
+            ->orWhere('tag.title LIKE :term')
 
             //parametre de sécurité afin que l utilisateur ne tape pas de requete sql dans l input
             ->setParameter('term','%'.$term.'%')
@@ -43,7 +49,7 @@ class ArticleRepository extends ServiceEntityRepository
             ->getQuery();
 
         //retourne le resultat de la requete
-        return $query->getResult();
+         return $query->getResult();
 
 
 

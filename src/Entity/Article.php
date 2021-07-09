@@ -49,9 +49,11 @@ class Article
     private $category;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Article", inversedBy="articles")
+     * @ORM\ManyToOne(targetEntity=Tag::class, inversedBy="articles")
      */
     private $tag;
+
+
 
     public function setIsPublished(?bool $isPublished): self
     {
@@ -132,21 +134,19 @@ class Article
         $this->category = $category;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getTag()
+    public function getTag(): ?Tag
     {
         return $this->tag;
     }
 
-    /**
-     * @param mixed $tag
-     */
-    public function setTag($tag): void
+    public function setTag(?Tag $tag): self
     {
         $this->tag = $tag;
+
+        return $this;
     }
+
+
 
 
 
