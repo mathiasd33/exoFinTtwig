@@ -7,4 +7,9 @@
 
 {% block main %}
     <h1 class="titreHome">Bienvenue</h1>
+
+    <form action="{{ path('search') }}" method="get">
+        <input type="text" name="q" placeholder="recherche">
+        <input type="submit" value="rechercher" >
+    </form>
 {% endblock main %}
