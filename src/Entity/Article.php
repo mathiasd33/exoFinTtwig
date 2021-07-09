@@ -44,9 +44,14 @@ class Article
     }
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="articles")
      */
     private $category;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Article", inversedBy="articles")
+     */
+    private $tag;
 
     public function setIsPublished(?bool $isPublished): self
     {
@@ -125,6 +130,22 @@ class Article
     public function setCategory($category): void
     {
         $this->category = $category;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
+     * @param mixed $tag
+     */
+    public function setTag($tag): void
+    {
+        $this->tag = $tag;
     }
 
 

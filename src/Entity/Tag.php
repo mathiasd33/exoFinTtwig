@@ -27,6 +27,11 @@ class Tag
      */
     private $color;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="tag")
+     */
+    private $articles;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -55,4 +60,14 @@ class Tag
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
+
 }

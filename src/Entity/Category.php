@@ -3,10 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\CatagoryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CategoryRepository::class)
+ * @ORM\Entity(repositoryClass=CatagoryRepository::class)
  */
 class Category
 {
@@ -27,7 +28,14 @@ class Category
      */
     private $description;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="category")
+     */
+    private $articles;
 
+    public function __construct(){
+        $this->articles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -56,6 +64,14 @@ class Category
         $this->description = $description;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArticles()
+    {
+        return $this->articles;
     }
 
 

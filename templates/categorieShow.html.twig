@@ -4,6 +4,11 @@
     <div class="show">
         <h1>{{ categorie.title }}</h1>
         <h2>{{ categorie.description }}</h2>
+
+        {% for article in categorie.articles %}
+            <p>{{ article.title }}</p>
+            <p>{{ article.content }}</p>
+        {% endfor %}
     </div>
 
     </body>
