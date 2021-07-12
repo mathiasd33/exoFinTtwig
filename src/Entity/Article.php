@@ -38,6 +38,7 @@ class Article
      */
     private $isPublished;
 
+
     public function getIsPublished(): ?bool
     {
         return $this->isPublished;
