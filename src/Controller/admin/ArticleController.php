@@ -5,10 +5,12 @@ namespace App\Controller\admin;
 
 use App\Entity\Article;
 use App\Entity\Tag;
+use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use App\Repository\CatagoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ArticleController extends AbstractController
@@ -16,48 +18,70 @@ class ArticleController extends AbstractController
 
 
 
-    /**
+     /**
      * @Route ("/admin/articles/insert",name="admin_article_insert")
      */
-    public function insertArticle(EntityManagerInterface $entityManager, CatagoryRepository $catagoryRepository)
-    {
-        //création d'un article
-        $article = new Article();
+     public function insertArticle( Request $request, EntityManagerInterface $entityManager)
+     {
+         $article = new Article();
+         //on génère le formulaire en utilisant le gabarit + une instance de l entité Article
+         $articleForm = $this->createForm(ArticleType::class, $article);
 
-        //setters pour renseigner la valeur des colonnes
+         // on lie le formulaire aux données de POST
+         $articleForm->handleRequest($request);
 
-        $article->setTitle('titre article');
-        $article->setContent('contenue de l article');
-        $article->setIsPublished('true');
-        $article->setCreatedAt(new \DateTime('NOW'));
+         if ($articleForm->isSubmitted()&&$articleForm->isValid()){
+               $entityManager->persist($article);
+               $entityManager->flush();
 
-        //je recupere la catégorie est 1 en bdd
-        //doctrine créé une instance de l'entité categorie avec les infos de la categorie de la bdd
-        $category = $catagoryRepository->find(1);
+               return $this->redirectToRoute('admin_article_list');
+         }
 
-        //j'associe l instance de l' entité categorie récupéré a l instance de l'entité article que je suis
-        //en train de créer
-        $article->setCategory($category);
-
-        //création nouveau tag
-        $tag = new Tag();
-        $tag->setTitle("info");
-        $tag->setColor("blue");
-
-        $entityManager->persist($tag);
-
-        $article->setTag($tag);
+         return $this->render('admin/insert.html.twig',[
+            'articleForm' =>$articleForm->createView()
+         ]);
+     }
 
 
-        //sauvegarde entité
-        $entityManager->persist($article);
-
-        //récupération des entitées pour les inserer en bdd
-        $entityManager->flush();
-
-        return $this->redirectToRoute('admin_article_list');
-
-    }
+//    public function insertArticle(EntityManagerInterface $entityManager, CatagoryRepository $catagoryRepository)
+//    {
+//        //création d'un article
+//        $article = new Article();
+//
+//        //setters pour renseigner la valeur des colonnes
+//
+//        $article->setTitle('titre article');
+//        $article->setContent('contenue de l article');
+//        $article->setIsPublished('true');
+//        $article->setCreatedAt(new \DateTime('NOW'));
+//
+//        //je recupere la catégorie est 1 en bdd
+//        //doctrine créé une instance de l'entité categorie avec les infos de la categorie de la bdd
+//        $category = $catagoryRepository->find(1);
+//
+//        //j'associe l instance de l' entité categorie récupéré a l instance de l'entité article que je suis
+//        //en train de créer
+//        $article->setCategory($category);
+//
+//        //création nouveau tag
+//        $tag = new Tag();
+//        $tag->setTitle("info");
+//        $tag->setColor("blue");
+//
+//        $entityManager->persist($tag);
+//
+//        $article->setTag($tag);
+//
+//
+//        //sauvegarde entité
+//        $entityManager->persist($article);
+//
+//        //récupération des entitées pour les inserer en bdd
+//        $entityManager->flush();
+//
+//        return $this->redirectToRoute('admin_article_list');
+//
+//    }
 
     /**
      * @Route ("/admin/articles/update/{id}",name="admin_article_update")
