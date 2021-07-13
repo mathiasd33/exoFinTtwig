@@ -2,14 +2,11 @@
 
 namespace App\Controller\admin;
 
-use App\Entity\Article;
+
 use App\Entity\Category;
-use App\Entity\Tag;
-use App\Repository\ArticleRepository;
 use App\Repository\CatagoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CategoriesController extends AbstractController
