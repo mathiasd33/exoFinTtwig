@@ -1,21 +1,21 @@
 <?php
 
 
-namespace App\Controller;
+namespace App\Controller\admin;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class homeController extends AbstractController
+class HomeController extends AbstractController
 {
 
     /**
-     * @Route ("/", name="home")
+     * @Route ("/admin", name="admin_home")
      */
 
     public function home()
     {
 
-        return $this->render("home.html.twig");
+        return $this->render("/admin/home.html.twig");
     }
 }

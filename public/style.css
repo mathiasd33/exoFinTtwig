@@ -45,6 +45,7 @@ a{
 .logoMenu{
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .logo{
@@ -86,12 +87,28 @@ a{
 .tag-container {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 20%;
-    margin-bottom: 15%;
+    justify-content: space-around;
+    background: coral;
 }
 
 .tag {
-    width: 33.33%;
+    box-shadow: 10px 10px 10px black;
+    border: solid black 1px;
+    background: indianred;
+    border-radius: 10px;
+    width: 40%;
+    padding: 5% 2%;
+    margin: 2%;
+}
+
+.insert{
     text-align: center;
-    border: 1px solid black;
+    margin: 40px 0;
+}
+
+.insert a{
+    background: #B0413E;
+    border-radius: 60px;
+    padding: 10px;
+
 }

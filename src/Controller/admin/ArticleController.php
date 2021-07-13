@@ -1,74 +1,23 @@
 <?php
 
 
-namespace App\Controller;
+namespace App\Controller\admin;
 
 use App\Entity\Article;
 use App\Entity\Tag;
 use App\Repository\ArticleRepository;
 use App\Repository\CatagoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
 
-class articleController extends AbstractController
+class ArticleController extends AbstractController
 {
-    /**
-     * @Route ("/articles", name="article_list")
-     */
-
-    public function articles_list(articleRepository $articleRepository)
-    {
-        $articles = $articleRepository->findAll();
-
-        return $this->render('articles_list.html.twig', [
-            'articles' => $articles
-        ]);
-    }
 
 
 
     /**
-     * @Route ("/article/{id}", name="articleShow")
-     */
-
-    public function articleShow($id, ArticleRepository $articleRepository)
-    {
-        $article = $articleRepository->find($id);
-
-        if (is_null($article)){
-            throw new NotFoundHttpException();
-        }
-
-        return $this->render("articleShow.html.twig", [
-            'article' => $article
-        ]);
-    }
-
-
-    /**
-     * @Route("/search", name="search")
-     */
-
-    public function search(ArticleRepository $articleRepository, request $request)
-    {
-        //  recherche de l'utilisateur (
-        $term = $request->query->get('q');
-
-        //  récupère le contenu de la recherche
-        $articles = $articleRepository->searchByTerm($term);
-
-        //  affiche les résultats
-        return $this->render('articleSearch.html.twig', [
-            'articles' => $articles,
-            'term' => $term
-        ]);
-    }
-
-    /**
-     * @Route ("/articles/insert",name="insert")
+     * @Route ("/admin/articles/insert",name="admin_article_insert")
      */
     public function insertArticle(EntityManagerInterface $entityManager, CatagoryRepository $catagoryRepository)
     {
@@ -106,12 +55,12 @@ class articleController extends AbstractController
         //récupération des entitées pour les inserer en bdd
         $entityManager->flush();
 
-        return $this->redirectToRoute('article_list');
+        return $this->redirectToRoute('admin_article_list');
 
     }
 
     /**
-     * @Route ("/articles/update/{id}",name="update")
+     * @Route ("/admin/articles/update/{id}",name="admin_article_update")
      */
     public function updateArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
     {
@@ -123,6 +72,33 @@ class articleController extends AbstractController
                $entityManager->flush();
 
            }
-           return $this->redirectToRoute('article_list');
+           return $this->redirectToRoute('admin_article_list');
+    }
+
+
+    /**
+     * @Route ("/admin/articles/delete/{id}",name="admin_article_delete")
+     */
+    public function deleteArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
+    {
+
+        $article = $articleRepository->find($id);
+        $entityManager->remove($article);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('admin_article_list');
+    }
+
+    /**
+     * @Route ("/admin/articles", name="admin_article_list")
+     */
+
+    public function articles_list(articleRepository $articleRepository)
+    {
+        $articles = $articleRepository->findAll();
+
+        return $this->render('admin/article_list.html.twig', [
+            'articles' => $articles
+        ]);
     }
 }

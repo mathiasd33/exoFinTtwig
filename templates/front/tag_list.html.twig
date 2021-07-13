@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends ('front/base.html.twig') %}
 
 {% block metaTitle %}
     La liste des tags
@@ -10,7 +10,7 @@
         {% for tag in tags %}
             <article class="tag">
                 <p style="background:{{ tag.color }} ">{{ tag.title }}</p>
-                <a href={{ path ('tagShow',{'id' : tag.id}) }}>Voir plus</a>
+                <a href={{ path ('tag_show',{'id' : tag.id}) }}>Voir plus</a>
             </article>
         {% endfor %}
     </div>

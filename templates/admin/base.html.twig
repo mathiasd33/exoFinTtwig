@@ -1,0 +1,48 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block metaTitle %}{% endblock metaTitle %}</title>
+    <link rel="stylesheet" href="{{ asset('style.css') }}">
+</head>
+
+<body>
+
+<header class="headerS">
+        <div class= "logoMenu">
+            <div class="logo">
+               <a href={{ path ('admin_home') }}><img src={{ asset ('medias/symfony.png') }}  class="resp"></a>
+            </div>
+
+            <div class="menuB" >
+                <a href={{ path ('admin_categorie_list') }}><img src={{ asset ('medias/menuB.png') }} alt="menu" class="resp"></a>
+            </div>
+
+
+
+        </div>
+</header>
+
+<main>
+
+    {%block main%}
+
+    {%endblock main%}
+
+</main>
+
+<footer class="footerE">
+    <div class="nav_foot">
+        <nav>
+            <ul>
+                <li><a href={{ path ('admin_article_list') }}>articles</a></li>
+                <li><a href={{ path ('admin_categorie_list') }}>catégories</a></li>
+                <li><a href={{ path ('admin_tag_list') }}>Tags</a></li>
+
+            </ul>
+        </nav>
+    </div>
+</footer>
+
+
+</body>
+</html>

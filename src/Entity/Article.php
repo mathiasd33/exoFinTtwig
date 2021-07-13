@@ -51,6 +51,7 @@ class Article
 
     /**
      * @ORM\ManyToOne(targetEntity=Tag::class, inversedBy="articles")
+     * @ORM\JoinColumn(name="tag_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $tag;
 

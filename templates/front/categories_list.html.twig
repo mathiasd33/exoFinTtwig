@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends ('front/base.html.twig') %}
 
    {% block metaTitle %}
        Liste des categories
@@ -19,7 +19,7 @@
                             <h1>{{categorie.title}}</h1>
 
                         <h2>{{categorie.description}}</h2>
-                        <a href={{ path ('categorieShow',{'id' : categorie.id}) }} >Voir plus</a>
+                        <a href={{ path ('categorie_show',{'id' : categorie.id}) }} >Voir plus</a>
                     </div>
                {#{% endif %}#}
             {% endfor %}

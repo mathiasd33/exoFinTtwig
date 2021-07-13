@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'front/base.html.twig' %}
 
    {% block metaTitle %}
        Liste des articles
@@ -19,9 +19,10 @@
                         <h1>{{article.title}}</h1>
 
                     <h2>{{article.content}}</h2>
-                    <a href={{ path ('articleShow',{'id' : article.id}) }} >Voir plus</a>
+                    <a href={{ path ('article_show',{'id' : article.id}) }} >Voir plus</a>
                 </div>
           {% endif %}
         {% endfor %}
+
     </div>
 {% endblock main %}

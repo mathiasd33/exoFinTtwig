@@ -13,9 +13,15 @@
                <a href={{ path ('home') }}><img src={{ asset ('medias/symfony.png') }}  class="resp"></a>
             </div>
 
+            <form action="{{ path('search') }}" method="get">
+                <input type="text" name="q" placeholder="recherche">
+                <input type="submit" value="rechercher" >
+            </form>
+
             <div class="menuB" >
                 <a href={{ path ('categories') }}><img src={{ asset ('medias/menuB.png') }} alt="menu" class="resp"></a>
             </div>
+
 
 
 

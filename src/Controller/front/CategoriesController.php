@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\front;
 
 use App\Repository\CatagoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,13 +12,13 @@ class CategoriesController extends AbstractController
 
 
     /**
-     * @Route ("/categories", name="categories")
+     * @Route ("/front/categories", name="categories")
      */
 
-    public function categoriesList(CatagoryRepository $catagoryRepository)
+    public function categories_list(CatagoryRepository $catagoryRepository)
     {
         $categories = $catagoryRepository->findAll();
-       return $this->render('categories_list.html.twig',[
+       return $this->render('front/categories_list.html.twig',[
          'categories' =>$categories
        ]);
     }
@@ -26,16 +26,16 @@ class CategoriesController extends AbstractController
 
 
     /**
-     * @Route ("/categorie/{id}", name="categorieShow")
+     * @Route ("/front/categorie/{id}", name="categorie_show")
      */
 
-    public function categorieShow($id, CatagoryRepository $catagoryRepository)
+    public function categorie_show($id, CatagoryRepository $catagoryRepository)
     {
         $categorie = $catagoryRepository->find($id);
         if (is_null($categorie)){
             throw new NotFoundHttpException();
         }
-        return $this->render("categorieShow.html.twig", [
+        return $this->render("front/categorie_show.html.twig", [
            'categorie' => $categorie
         ]);
     }
