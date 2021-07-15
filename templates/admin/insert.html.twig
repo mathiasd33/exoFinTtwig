@@ -21,6 +21,8 @@
 
     <section class="border border-grey w-50 mt-5 p-3 m-auto mb-5 bg bg-dark text-light rounded">
 
+        <h1 class="text-center">Ajouter un article</h1>
+
     <div class="m-4 ">
         {#permet de rendre le label du champs title #}
         {{ form_label(articleForm.title , 'TITRE',{'label_attr': {'class': 'form-label'}}) }}
@@ -39,9 +41,21 @@
     </div>
 
     <div class="m-4">
+        {{ form_label(articleForm.category, 'Catégories',{'label_attr': {'class':'form-label' }}) }}
+        {{ form_widget(articleForm.category) }}
+    </div>
+
+    <div class="m-4">
+        {{ form_label(articleForm.tag, 'Tags',{'label_attr': {'class':'form-label' }}) }}
+        {{ form_widget(articleForm.tag) }}
+    </div>
+
+    <div class="m-4">
         {{ form_label(articleForm.isPublished) }}
         {{ form_widget(articleForm.isPublished) }}
     </div>
+
+
 
     <div class="d-flex justify-content-center">
         {{ form_widget(articleForm.submit , {'attr': {'class': 'btn btn-primary w-25 '}}) }}
