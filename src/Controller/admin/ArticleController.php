@@ -86,17 +86,35 @@ class ArticleController extends AbstractController
     /**
      * @Route ("/admin/articles/update/{id}",name="admin_article_update")
      */
-    public function updateArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
+    public function updateArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager, Request $request)
     {
         $article = $articleRepository->find($id);
-           if ($article)
-           {
-               $article->setTitle("nouveau titre");
-               $entityManager->persist($article);
-               $entityManager->flush();
+        //on génère le formulaire en utilisant le gabarit + une instance de l entité Article
+        $articleForm = $this->createForm(ArticleType::class, $article);
 
-           }
-           return $this->redirectToRoute('admin_article_list');
+        // on lie le formulaire aux données de POST
+        $articleForm->handleRequest($request);
+
+        if ($articleForm->isSubmitted()&&$articleForm->isValid()){
+            $entityManager->persist($article);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('admin_article_list');
+        }
+
+        return $this->render('admin/insert.html.twig',[
+            'articleForm' =>$articleForm->createView()
+        ]);
+
+//
+//           if ($article)
+//           {
+//               $article->setTitle("nouveau titre");
+//               $entityManager->persist($article);
+//               $entityManager->flush();
+//
+//           }
+//           return $this->redirectToRoute('admin_article_list');
     }
 
 

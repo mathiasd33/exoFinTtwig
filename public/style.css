@@ -18,8 +18,8 @@ li{
 }
 
 a{
-    text-decoration: none;
-    color: black;
+    text-decoration: none !important;
+    color: black !important;
 }
 
 .show{
@@ -81,7 +81,10 @@ a{
 
 .footerE{
      background: paleturquoise;
-     height: 80px
+     height: 80px;
+    position:fixed;
+    bottom: 0;
+    width:100%
  }
 
 .tag-container {
@@ -112,3 +115,4 @@ a{
     padding: 10px;
 
 }
+
