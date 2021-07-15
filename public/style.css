@@ -82,9 +82,10 @@ a{
 .footerE{
      background: paleturquoise;
      height: 80px;
-    position:fixed;
-    bottom: 0;
-    width:100%
+     width:100%;
+
+
+
  }
 
 .tag-container {
