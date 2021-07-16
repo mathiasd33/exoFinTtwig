@@ -5,9 +5,11 @@ namespace App\Controller\admin;
 
 
 use App\Entity\Tag;
+use App\Form\TagType;
 use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class TagController extends AbstractController
@@ -28,44 +30,86 @@ class TagController extends AbstractController
     /**
      * @Route ("/admin/tags/insert",name="admin_tag_insert")
      */
-    public function insertTag(EntityManagerInterface $entityManager)
+    public function insertTag(Request $request, EntityManagerInterface $entityManager)
     {
-        //création d'un tag
+
         $tag = new Tag();
+        //on génère le formulaire en utilisant le gabarit + une instance de l entité Article
+        $tagForm = $this->createForm(TagType::class, $tag);
 
-        //setters pour renseigner la valeur des colonnes
+        // on lie le formulaire aux données de POST
+        $tagForm->handleRequest($request);
 
-        $tag->setTitle('titre tag');
-        $tag->setColor('black');
+        if ($tagForm->isSubmitted() && $tagForm->isValid()) {
+            $entityManager->persist($tag);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('admin_tag_list');
 
 
-        $entityManager->persist($tag);
+        }
+        return $this->render('admin/insertTag.html.twig', [
+            'tagForm' => $tagForm->createView()
+        ]);
 
-        //sauvegarde entité
-        $entityManager->persist($tag);
 
-        //récupération des entitées pour les inserer en bdd
-        $entityManager->flush();
+//        //création d'un tag
+//        $tag = new Tag();
+//
+//        //setters pour renseigner la valeur des colonnes
+//
+//        $tag->setTitle('titre tag');
+//        $tag->setColor('black');
+//
+//
+//        $entityManager->persist($tag);
+//
+//        //sauvegarde entité
+//        $entityManager->persist($tag);
+//
+//        //récupération des entitées pour les inserer en bdd
+//        $entityManager->flush();
 
-        return $this->redirectToRoute('admin_tag_list');
+
 
     }
 
     /**
      * @Route ("/admin/tag/update/{id}",name="admin_tag_update")
      */
-    public function updateTag($id, TagRepository $tagRepository, EntityManagerInterface $entityManager)
+    public function updateTag ($id, TagRepository $tagRepository, EntityManagerInterface $entityManager, Request $request)
     {
+
         $tag = $tagRepository->find($id);
-        if ($tag)
-        {
-            $tag->setTitle("nouveau titre");
-            $tag->setColor('purple');
+        //on génère le formulaire en utilisant le gabarit + une instance de l entité Article
+        $tagForm = $this->createForm(TagType::class, $tag);
+
+        // on lie le formulaire aux données de POST
+        $tagForm->handleRequest($request);
+
+        if ($tagForm->isSubmitted() && $tagForm->isValid()) {
             $entityManager->persist($tag);
             $entityManager->flush();
 
+            return $this->redirectToRoute('admin_tag_list');
+
+
         }
-        return $this->redirectToRoute('admin_tag_list');
+        return $this->render('admin/insertTag.html.twig', [
+            'tagForm' => $tagForm->createView()
+        ]);
+
+
+//        $tag = $tagRepository->find($id);
+//        if ($tag)
+//        {
+//            $tag->setTitle("nouveau titre");
+//            $tag->setColor('purple');
+//            $entityManager->persist($tag);
+//            $entityManager->flush();
+//
+//        }
+        //return $this->redirectToRoute('admin_tag_list');
     }
 
 

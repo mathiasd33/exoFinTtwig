@@ -24,6 +24,7 @@
         <h1 class="text-center">Ajouter un article</h1>
 
     <div class="m-4 ">
+        {{ form_errors(articleForm.title) }}
         {#permet de rendre le label du champs title #}
         {{ form_label(articleForm.title , 'TITRE',{'label_attr': {'class': 'form-label'}}) }}
         {#permet de rendre l'input du champs title #}
@@ -32,25 +33,30 @@
 
 
     <div class="m-4">
+        {{ form_errors(articleForm.content) }}
         {{ form_label(articleForm.content, 'CONTENU',{'label_attr': {'class': 'form-label'}}) }}
         {{ form_widget(articleForm.content, {'attr': {'class': 'form-control', 'placeholder': 'remplissez le contenu...'}}) }}
     </div>
 
     <div class="m-4">
+        {{ form_errors(articleForm.createdAt) }}
         {{ form_widget(articleForm.createdAt) }}
     </div>
 
     <div class="m-4">
+        {{ form_errors(articleForm.category) }}
         {{ form_label(articleForm.category, 'Catégories',{'label_attr': {'class':'form-label' }}) }}
         {{ form_widget(articleForm.category) }}
     </div>
 
     <div class="m-4">
+        {{ form_errors(articleForm.tag) }}
         {{ form_label(articleForm.tag, 'Tags',{'label_attr': {'class':'form-label' }}) }}
         {{ form_widget(articleForm.tag) }}
     </div>
 
     <div class="m-4">
+        {{ form_errors(articleForm.isPublished) }}
         {{ form_label(articleForm.isPublished) }}
         {{ form_widget(articleForm.isPublished) }}
     </div>
