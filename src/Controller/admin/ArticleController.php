@@ -182,10 +182,4 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route ()
-     */
-    public function new(Request $request, SluggerInterface $slugger){
-
-    }
 }
