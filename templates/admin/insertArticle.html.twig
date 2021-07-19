@@ -61,6 +61,12 @@
         {{ form_widget(articleForm.isPublished) }}
     </div>
 
+        <div class="m-4">
+            {{ form_errors(articleForm.image) }}
+            {{ form_label(articleForm.image) }}
+            {{ form_widget(articleForm.image) }}
+        </div>
+
 
 
     <div class="d-flex justify-content-center">

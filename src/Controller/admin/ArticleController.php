@@ -10,9 +10,11 @@ use App\Repository\ArticleRepository;
 use App\Repository\CatagoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ArticleController extends AbstractController
 {
@@ -22,16 +24,36 @@ class ArticleController extends AbstractController
      /**
      * @Route ("/admin/articles/insert",name="admin_article_insert")
      */
-     public function insertArticle( Request $request, EntityManagerInterface $entityManager) : Response
+     public function insertArticle( Request $request, EntityManagerInterface $entityManager,SluggerInterface $slugger) : Response
      {
          $article = new Article();
          //on génère le formulaire en utilisant le gabarit + une instance de l entité Article
          $articleForm = $this->createForm(ArticleType::class, $article);
 
+
          // on lie le formulaire aux données de POST
          $articleForm->handleRequest($request);
 
          if ($articleForm->isSubmitted()&&$articleForm->isValid()){
+             $imageFile = $articleForm->get('image')->getData();
+
+         if ($imageFile){
+             $originalFilename = pathinfo($imageFile->getClientOriginalName(),PATHINFO_FILENAME);
+             $safeFilename = $slugger->slug($originalFilename);
+             $newFilename = $safeFilename .'_'.uniqid().'.'.$imageFile->guessExtension();
+
+             try {
+                 $imageFile->move(
+                     $this->getParameter('upload_directory'),
+                     $newFilename
+                 );
+             } catch (FileException $exception) {
+                 // ... handle exception if something happens during file upload
+             }
+
+             $article->setImage($newFilename);
+         }
+
 
              $this->addFlash(
                  'succes',
@@ -158,5 +180,12 @@ class ArticleController extends AbstractController
         return $this->render('admin/article_list.html.twig', [
             'articles' => $articles
         ]);
+    }
+
+    /**
+     * @Route ()
+     */
+    public function new(Request $request, SluggerInterface $slugger){
+
     }
 }
