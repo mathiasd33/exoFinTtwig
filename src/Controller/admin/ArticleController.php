@@ -11,6 +11,7 @@ use App\Repository\CatagoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ArticleController extends AbstractController
@@ -21,7 +22,7 @@ class ArticleController extends AbstractController
      /**
      * @Route ("/admin/articles/insert",name="admin_article_insert")
      */
-     public function insertArticle( Request $request, EntityManagerInterface $entityManager)
+     public function insertArticle( Request $request, EntityManagerInterface $entityManager) : Response
      {
          $article = new Article();
          //on génère le formulaire en utilisant le gabarit + une instance de l entité Article
@@ -31,6 +32,11 @@ class ArticleController extends AbstractController
          $articleForm->handleRequest($request);
 
          if ($articleForm->isSubmitted()&&$articleForm->isValid()){
+
+             $this->addFlash(
+                 'succes',
+                 'Votre article '. $article->getTitle().' à bien été créé !'
+             );
                $entityManager->persist($article);
                $entityManager->flush();
 
@@ -96,6 +102,12 @@ class ArticleController extends AbstractController
         $articleForm->handleRequest($request);
 
         if ($articleForm->isSubmitted()&&$articleForm->isValid()){
+
+            $this->addFlash(
+                'succes',
+                'Votre article '. $article->getTitle().' a bien été modifié !'
+            );
+
             $entityManager->persist($article);
             $entityManager->flush();
 
@@ -127,6 +139,10 @@ class ArticleController extends AbstractController
         $article = $articleRepository->find($id);
         $entityManager->remove($article);
         $entityManager->flush();
+        $this->addFlash(
+            'succes',
+            'Votre article '. $article->getTitle().' a bien été supprimé !'
+        );
 
         return $this->redirectToRoute('admin_article_list');
     }

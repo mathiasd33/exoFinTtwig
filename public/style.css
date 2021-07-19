@@ -117,3 +117,14 @@ a{
 
 }
 
+.flash {
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: orangered;
+    background-color: silver;
+    font-size: 20px;
+    width: 50%;
+    margin: auto;
+}
+

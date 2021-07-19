@@ -10,7 +10,7 @@ class HomeController extends AbstractController
 {
 
     /**
-     * @Route ("/front", name="home")
+     * @Route ("/", name="home")
      */
 
     public function home()

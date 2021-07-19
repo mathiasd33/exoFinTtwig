@@ -41,6 +41,10 @@ class TagController extends AbstractController
         $tagForm->handleRequest($request);
 
         if ($tagForm->isSubmitted() && $tagForm->isValid()) {
+            $this->addFlash(
+                'succes',
+                'Votre tag '. $tag->getTitle().' a bien été crée !'
+            );
             $entityManager->persist($tag);
             $entityManager->flush();
 
@@ -88,6 +92,10 @@ class TagController extends AbstractController
         $tagForm->handleRequest($request);
 
         if ($tagForm->isSubmitted() && $tagForm->isValid()) {
+            $this->addFlash(
+                'succes',
+                'Votre tag '. $tag->getTitle().' a bien été modifié !'
+            );
             $entityManager->persist($tag);
             $entityManager->flush();
 
@@ -122,6 +130,10 @@ class TagController extends AbstractController
         $tag = $tagRepository->find($id);
         $entityManager->remove($tag);
         $entityManager->flush();
+        $this->addFlash(
+            'succes',
+            'Votre tag '. $tag->getTitle().' a bien été supprimé !'
+        );
 
         return $this->redirectToRoute('admin_tag_list');
     }

@@ -21,7 +21,7 @@ class Article
 
     /**
      * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Le champ "titre" est obligatoire ")
+     * @Assert\NotBlank(message="Le champ 'titre' est obligatoire ")
      */
     private $title;
 

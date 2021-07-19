@@ -42,6 +42,10 @@ class CategoriesController extends AbstractController
         $categorieForm->handleRequest($request);
 
         if ($categorieForm->isSubmitted()&&$categorieForm->isValid()){
+            $this->addFlash(
+                'succes',
+                'Votre catégorie '. $categorie->getTitle().' a bien été crée !'
+            );
             $entityManager->persist($categorie);
             $entityManager->flush();
             return $this->redirectToRoute('admin_categorie_list');
@@ -82,6 +86,10 @@ class CategoriesController extends AbstractController
         $categorieForm->handleRequest($request);
 
         if ($categorieForm->isSubmitted() && $categorieForm->isValid()){
+            $this->addFlash(
+                'succes',
+                'Votre catégorie '. $categorie->getTitle().' a bien été modifiée !'
+            );
             $entityManager->persist($categorie);
             $entityManager->flush();
             return $this->redirectToRoute('admin_categorie_list');
@@ -114,6 +122,10 @@ class CategoriesController extends AbstractController
             $category->setTitle("nouveau titre");
             $entityManager->remove($category);
             $entityManager->flush();
+            $this->addFlash(
+                'succes',
+                'Votre catégorie '. $category->getTitle().' a bien été supprimée !'
+            );
 
         }
         return $this->redirectToRoute('admin_categorie_list');
