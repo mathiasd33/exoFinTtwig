@@ -16,14 +16,15 @@
             </div>
 
             <div class="menuB" >
-                <a href={{ path ('admin_categorie_list') }}><img src={{ asset ('medias/menuB.png') }} alt="menu" class="resp"></a>
+                <a href={{ path ('admin_categorie_list') }}>
+                    <img src={{ asset ('medias/menuB.png') }} alt="menu" class="resp"></a>
             </div>
 
             <div>
                 {% if app.user %}
                     <div class="mb-3">
                         <p><strong>Bienvenue: </strong> {{ app.user.username }}</p>
-                        </p> <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                        <p><a href="{{ path('app_logout') }}">Se déconnecter</a></p>
                         <a href="{{ path('adminInsertUser') }}">/Ajouter un utlisateur</a>
                     </div>
                 {% endif %}

@@ -5,8 +5,6 @@
    {% endblock metaTitle %}
 
 
-
-
 {% block main %}
 
     <h1 class="titreCategories" >Il y a {{ articles | length }} articles dans la base de données</h1>
@@ -20,7 +18,7 @@
                         <h1>{{article.title}}</h1>
 
                     <h2>{{article.content}}</h2>
-                    <img src="{{ asset('uploads/' ~ article.image) }}"/>
+                    <img src="{{ asset('uploads/' ~ article.image) }}" alt="{{ article.title }}" class="resp"/>
                     <p><a href={{ path ('admin_article_update',{'id' : article.id}) }} >modifier</a></p>
                     <p><a href={{ path ('admin_article_delete',{'id' : article.id}) }} >supprimer</a></p>
                 </div>

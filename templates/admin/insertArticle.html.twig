@@ -1,13 +1,11 @@
-{% extends 'admin/base.html.twig' %}
 
-{% block main %}
 
 
     {#    {% form_theme articleForm 'bootstrap_4_layout.html.twig' %}#}
     {#    {{ form(articleForm) }}#}
 
     {#    #}{# équivalent de la balise d'ouverture du form #}
-    {{ form_start(articleForm) }}
+
 
     {#        #}{# permet d'afficher une row du formulaire (label + input) #}
     {#        {{ form_row(articleForm.title) }}#}
@@ -17,8 +15,11 @@
     {#        </div>#}
     {#        {{ form_row(articleForm.isPublished) }}#}
     {#        {{ form_row(articleForm.submit) }}#}
+{% extends 'admin/base.html.twig' %}
 
+{% block main %}
 
+    {{ form_start(articleForm) }}
     <section class="border border-grey w-50 mt-5 p-3 m-auto mb-5 bg bg-dark text-light rounded">
 
         <h1 class="text-center">Ajouter un article</h1>

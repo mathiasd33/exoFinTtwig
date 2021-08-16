@@ -4,7 +4,6 @@ namespace App\Controller\admin;
 
 
 use App\Entity\Category;
-use App\Form\ArticleType;
 use App\Form\CategoryType;
 use App\Repository\CatagoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -97,7 +96,8 @@ class CategoriesController extends AbstractController
 
         }
         return $this->render('admin/insertCategorie.html.twig',[
-            'categorieForm' =>$categorieForm->createView()]);
+            'categorieForm' =>$categorieForm->createView()
+        ]);
 
 
 //        $category = $catagoryRepository->find($id);
@@ -119,7 +119,6 @@ class CategoriesController extends AbstractController
         $category = $catagoryRepository->find($id);
         if ($category)
         {
-            $category->setTitle("nouveau titre");
             $entityManager->remove($category);
             $entityManager->flush();
             $this->addFlash(

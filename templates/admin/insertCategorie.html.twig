@@ -1,13 +1,11 @@
-{% extends 'admin/base.html.twig' %}
 
-{% block main %}
 
 
     {#    {% form_theme categorieForm 'bootstrap_4_layout.html.twig' %}#}
     {#    {{ form(categorieForm) }}#}
 
     {#    #}{# équivalent de la balise d'ouverture du form #}
-    {{ form_start(categorieForm) }}
+
 
     {#        #}{# permet d'afficher une row du formulaire (label + input) #}
     {#        {{ form_row(categorieForm.title) }}#}
@@ -17,9 +15,11 @@
     {#        </div>#}
     {#        {{ form_row(categorieForm.isPublished) }}#}
     {#        {{ form_row(categorieForm.submit) }}#}
+{% extends 'admin/base.html.twig' %}
 
-
-<section class="border border-grey w-50 mt-5 p-3 m-auto mb-5 bg bg-dark text-light rounded">
+{% block main %}
+    {{ form_start(categorieForm) }}
+    <section class="border border-grey w-50 mt-5 p-3 m-auto mb-5 bg bg-dark text-light rounded">
 
     <h1 class="text-center">Ajouter une catégorie</h1>
 
